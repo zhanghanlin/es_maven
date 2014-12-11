@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Product">
+	<select id="searchAll" resultType="Product">
+		<![CDATA[
+		select distinct p.id, p.name
+		  from p_product p, p_sku s
+		 where p.id = s.p_product_id
+		   and p.status = 0
+		   and p.stock_status = 1
+		   and s.status = 0
+		   and s.stock_status = 1
+		]]>
+	</select>
+	<select id="searchByIds" resultType="Product">
+		<![CDATA[
+		select distinct p.id as id, p.name as name
+		  from p_product p, p_sku s
+		 where p.id = s.p_product_id
+		   and p.status = 0
+		   and p.stock_status = 1
+		   and s.status = 0
+		   and s.stock_status = 1
+		   and p.id in
+		]]>
+		<foreach collection="list" open="(" close=")" item="item"
+			separator="," index="index">
+			#{item}
+		</foreach>
+	</select>
+</mapper> 
