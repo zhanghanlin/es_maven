@@ -16,11 +16,10 @@ es_maven
 		存在表p_brand[id,name]
 2.	Jar包修改
 		
-		由于Oracle限制ojdbc14需要自行下载至maven资源库,修改名称为ojdbc14-10.2.0.3.0
+		由于Oracle限制ojdbc14需要使用web下对应的包
 		
 		ojdbc14包路径src/main/webapp/WEB-INF/lib/ojdbc14-10.2.0.3.0.jar
-		
-		启动前需要将src/main/webapp/WEB-INF/lib/下的lib删除
+
 3.	启动脚本
 		
 		在项目根目录执行：jettyTest.bat

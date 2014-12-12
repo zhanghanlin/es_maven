@@ -203,11 +203,11 @@
 			<version>${log4j.version}</version>
 		</dependency>
 		<!-- ojdbc14 -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc14</artifactId>
 			<version>${ojdbc14.version}</version>
-		</dependency>
+		</dependency> -->
 		<!-- ojdbc14 -->
 		<dependency>
 			<groupId>com.googlecode.log4jdbc</groupId>
