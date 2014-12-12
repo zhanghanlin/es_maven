@@ -14,8 +14,8 @@
 	<properties>
 		<!-- other setting -->
 		<jdk.version>1.6</jdk.version>
-		<jetty.version>6.1.10</jetty.version>
-		<webserver.port>8181</webserver.port>
+		<jetty.version>8.1.8.v20121106</jetty.version>
+		<webserver.port>8081</webserver.port>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<downloadSources>false</downloadSources>
 
