@@ -47,6 +47,8 @@
 		<jedis.version>2.1.0</jedis.version>
 		<fastjson.version>1.2.3</fastjson.version>
 		<junit.version>4.7</junit.version>
+		<ojdbc14.version>10.2.0.3.0</ojdbc14.version>
+		<log4jdbc.version>1.2</log4jdbc.version>
 	</properties>
 	
 	<!-- 设定除中央仓库(repo1.maven.org/maven2/)外的其他仓库,按设定顺序进行查找. -->
@@ -199,6 +201,18 @@
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>${log4j.version}</version>
+		</dependency>
+		<!-- ojdbc14 -->
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc14</artifactId>
+			<version>${ojdbc14.version}</version>
+		</dependency>
+		<!-- ojdbc14 -->
+		<dependency>
+			<groupId>com.googlecode.log4jdbc</groupId>
+			<artifactId>log4jdbc</artifactId>
+			<version>${log4jdbc.version}</version>
 		</dependency>
 		<!-- elasticsearch -->
 		<dependency>

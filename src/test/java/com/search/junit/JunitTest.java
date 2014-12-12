@@ -36,7 +36,7 @@ public class JunitTest {
 	public void test() {
 		List<String> pidList = new ArrayList<String>();
 		pidList.add("8260");
-		// job.flushProduct(pidList);
+		job.flushProduct(pidList);
 		Product product = productFacade.get(8260L);
 		System.out.println(JSONObject.toJSONString(product));
 	}
