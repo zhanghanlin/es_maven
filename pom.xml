@@ -208,6 +208,13 @@
 			<artifactId>ojdbc14</artifactId>
 			<version>${ojdbc14.version}</version>
 		</dependency> -->
+		<dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc14</artifactId>
+            <version>${ojdbc14.version}</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/ojdbc14-10.2.0.3.0.jar</systemPath>
+        </dependency>
 		<!-- ojdbc14 -->
 		<dependency>
 			<groupId>com.googlecode.log4jdbc</groupId>
@@ -401,14 +408,6 @@
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
 		</dependency>
-		<!-- 自定义jar依赖包
-		<dependency>
-            <groupId>com.test</groupId>
-            <artifactId>test-core</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/test-core-1.0.jar</systemPath>
-        </dependency> -->
 	</dependencies>
 	<!-- 开发者信息 -->
 	<developers>

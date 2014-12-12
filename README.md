@@ -14,12 +14,9 @@ es_maven
 		存在表p_product[id,name]
 		
 		存在表p_brand[id,name]
-2.	Jar包修改
+2.	ojdbc14 Jar包
 		
-		由于Oracle限制ojdbc14需要使用web下对应的包
-		
-		ojdbc14包路径src/main/webapp/WEB-INF/lib/ojdbc14-10.2.0.3.0.jar
-
+		ojdbc14包路径/lib/ojdbc14-10.2.0.3.0.jar
 3.	启动脚本
 		
 		在项目根目录执行：jettyTest.bat
