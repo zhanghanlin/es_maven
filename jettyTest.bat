@@ -1,2 +1,2 @@
-#Jetty 测试启动脚本
+::Jetty Test
 mvn -Djetty.port=9999 jetty:run
