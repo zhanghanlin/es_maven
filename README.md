@@ -16,6 +16,8 @@ es_maven
 		存在表p_brand[id,name]
 2.	ojdbc14 Jar包
 		
+		由于Oracle限制ojdbc14需要自行下载
+		
 		ojdbc14包路径/lib/ojdbc14-10.2.0.3.0.jar
 3.	启动脚本
 		
