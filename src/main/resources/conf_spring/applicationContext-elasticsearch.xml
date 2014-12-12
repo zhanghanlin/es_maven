@@ -23,7 +23,7 @@
 			<props>
 				<prop key="projectx.index.dir">/var/tmp/index</prop>
 				<prop key="projectx.index.dir.create">true</prop>
-				<prop key="projectx.index.name">es_search</prop>
+				<prop key="projectx.index.name">es_maven</prop>
 			</props>
 		</property>
 	</bean>
