@@ -19,7 +19,7 @@ es_maven
 		在项目根目录执行：jettyTest.bat
 3.	初始化数据
 		
-		访问URL:http://localhost:8081/es_maven/init/initProduct.jsp?ids=8260,8261,173322
+		访问URL:http://localhost:8081/es_maven/init/initProduct.jsp?ids=1,2,3
 4.	查看数据
 		
-		访问URL:http://localhost:8081/es_maven/interface/getProduct.jsp?id=173322
+		访问URL:http://localhost:8081/es_maven/interface/getProduct.jsp?id=1
