@@ -2,6 +2,8 @@ package com.search.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringUtils extends org.apache.commons.lang.StringUtils {
 
@@ -11,7 +13,7 @@ public class StringUtils extends org.apache.commons.lang.StringUtils {
 	 * @param str
 	 * @return
 	 */
-	public static String unicode(String str) {
+	public static String string2Unicode(String str) {
 		String result = "";
 		if (isNotBlank(str)) {
 			int length = str.length();
@@ -26,6 +28,23 @@ public class StringUtils extends org.apache.commons.lang.StringUtils {
 			}
 		}
 		return result;
+	}
+
+	/**
+	 * Unicode to String
+	 * 
+	 * @param str
+	 * @return
+	 */
+	public static String unicode2String(String str) {
+		Pattern pattern = Pattern.compile("(\\\\u(\\p{XDigit}{4}))");
+		Matcher matcher = pattern.matcher(str);
+		char ch;
+		while (matcher.find()) {
+			ch = (char) Integer.parseInt(matcher.group(2), 16);
+			str = str.replace(matcher.group(1), ch + "");
+		}
+		return str;
 	}
 
 	/**
