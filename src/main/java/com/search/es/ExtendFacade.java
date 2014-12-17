@@ -3,7 +3,6 @@ package com.search.es;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.client.Client;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.search.util.Constants;
 
@@ -16,12 +15,11 @@ import com.search.util.Constants;
 public abstract class ExtendFacade<T> {
 
 	@Autowired
-	@Qualifier("esNode")
-	private ElasticsearchNodeFactoryBean esNodeFactory;
+	private ElasticsearchNodeFactoryBean esNode;
 
-	public Client getClient() {
+	protected Client getClient() {
 		try {
-			Client c = esNodeFactory.getObject().client();
+			Client c = esNode.getObject().client();
 			return c;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -30,7 +28,7 @@ public abstract class ExtendFacade<T> {
 		}
 	}
 
-	public SearchRequestBuilder getBuilder() {
+	protected SearchRequestBuilder getBuilder() {
 		return getClient().prepareSearch(Constants.GLOBAL_INDEX_NAME);
 	}
 	

@@ -1,0 +1,24 @@
+{
+    "product": {
+        "_all": {
+            "indexAnalyzer": "ik_max_word",
+            "searchAnalyzer": "ik_max_word",
+            "term_vector": "no",
+            "store": "false"
+        },
+        "properties": {
+            "id": {
+                "type": "long"
+            },
+            "name": {
+                "type": "string",
+                "store": "no",
+                "term_vector": "with_positions_offsets",
+                "indexAnalyzer": "ik",
+                "searchAnalyzer": "ik",
+                "include_in_all": "true",
+                "boost": 8
+            }
+        }
+    }
+}

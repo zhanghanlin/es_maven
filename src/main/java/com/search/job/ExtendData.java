@@ -11,6 +11,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.alibaba.fastjson.JSON;
 import com.search.util.Constants;
 import com.search.util.Jerseys;
 import com.sun.jersey.api.client.WebResource;
@@ -42,12 +43,29 @@ public abstract class ExtendData<T> {
 			.getRuntime().availableProcessors() + 1);
 
 	/**
-	 * 写入数据方法
+	 * 写入业务逻辑
 	 * 
-	 * @param obj
+	 * @param t
+	 *            Bean
 	 * @throws Exception
 	 */
-	public abstract void put(T t) throws Exception;
+	protected abstract void businessPut(T t) throws Exception;
+
+	/**
+	 * 写入数据方法
+	 * 
+	 * @param id
+	 *            BeanId
+	 * @param t
+	 *            Bean
+	 * @throws Exception
+	 */
+	protected void put(Long id, T t) throws Exception {
+		WebResource wr = client.path("/" + Constants.GLOBAL_INDEX_NAME + "/"
+				+ beanType() + "/" + id);
+		String pjson = JSON.toJSON(t).toString();
+		wr.put(pjson);
+	}
 
 	/**
 	 * 获取数据集合
@@ -55,14 +73,21 @@ public abstract class ExtendData<T> {
 	 * @param param
 	 * @return
 	 */
-	public abstract List<T> getList(List<String> param);
+	protected abstract List<T> getList(List<String> param);
+
+	/**
+	 * Bean Name
+	 * 
+	 * @return
+	 */
+	protected abstract String beanType();
 
 	/**
 	 * 多线程刷新
 	 * 
 	 * @param param
 	 */
-	public void run(List<String> param) {
+	protected void run(List<String> param) {
 		logger.info("[Job Flush] begin fresh run..............");
 		// 子对象集合
 		List<T> list = getList(param);
@@ -79,11 +104,12 @@ public abstract class ExtendData<T> {
 						public void run() {
 							try {
 								// 具体执行子对象实现方法
-								put(t);
+								businessPut(t);
 							} catch (Exception e) {
 								// TODO: handle exception
 								e.printStackTrace();
-								logger.error("[Job Flush] run() error :" + e.getMessage());
+								logger.error("[Job Flush] run() error :"
+										+ e.getMessage());
 							} finally {
 								// 每一个线程执行完毕,调用countDown()方法,直到全部的线程(count个)执行完毕,闭锁打开
 								allLatch.countDown();

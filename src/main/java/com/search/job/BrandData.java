@@ -6,11 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.fastjson.JSON;
 import com.search.bean.Brand;
 import com.search.dao.BrandDao;
-import com.search.util.Constants;
-import com.sun.jersey.api.client.WebResource;
 
 @Service
 public class BrandData extends ExtendData<Brand> {
@@ -21,24 +18,26 @@ public class BrandData extends ExtendData<Brand> {
 	/**
 	 * 数据集合
 	 */
-	List<Brand> objList = new ArrayList<Brand>();
+	List<Brand> list = new ArrayList<Brand>();
 
 	@Override
-	public void put(Brand t) throws Exception {
-		Long id = t.getId();
-		WebResource wr = client.path("/" + Constants.GLOBAL_INDEX_NAME
-				+ "/brand/" + id);
-		String pjson = JSON.toJSON(t).toString();
-		wr.put(pjson);
+	protected void businessPut(Brand t) throws Exception {
+		put(t.getId(), t);
 	}
 
 	@Override
-	public List<Brand> getList(List<String> param) {
+	protected List<Brand> getList(List<String> param) {
 		if (null != param && param.size() > 0) {
-			objList = brandDao.searchByIds(param);
+			list = brandDao.searchByIds(param);
 		} else {
-			objList = brandDao.searchAll();
+			list = brandDao.searchAll();
 		}
-		return objList;
+		return list;
+	}
+
+	@Override
+	protected String beanType() {
+		// TODO Auto-generated method stub
+		return "brand";
 	}
 }
