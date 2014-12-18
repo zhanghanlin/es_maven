@@ -3,12 +3,13 @@ package com.search.job;
 import java.io.IOException;
 import java.util.List;
 
+import org.elasticsearch.ElasticsearchException;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.common.io.Streams;
-import org.elasticsearch.node.internal.InternalNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.search.es.ElasticsearchNodeFactoryBean;
 import com.search.util.Constants;
 
 /**
@@ -21,8 +22,21 @@ import com.search.util.Constants;
 public class Job {
 
 	@Autowired
-	InternalNode esNode;
-	final Client esClient = esNode.client();
+	ElasticsearchNodeFactoryBean esNode;
+
+	private Client esClient;
+
+	public Client getEsClient() {
+		if (esClient == null) {
+			try {
+				esClient = esNode.getObject().client();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return esClient;
+	}
 
 	@Autowired
 	ProductData productData;
@@ -66,9 +80,17 @@ public class Job {
 			String mapping = Streams
 					.copyToStringFromClasspath(Constants.ES_SEARCH_JSON_PATH
 							+ type + ".json");
-			esClient.admin().indices()
-					.preparePutMapping(Constants.GLOBAL_INDEX_NAME)
-					.setType(type).setSource(mapping).execute().actionGet();
+			try {
+				getEsClient().admin().indices()
+						.preparePutMapping(Constants.GLOBAL_INDEX_NAME)
+						.setType(type).setSource(mapping).execute().actionGet();
+			} catch (ElasticsearchException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

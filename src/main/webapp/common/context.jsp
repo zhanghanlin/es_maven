@@ -4,6 +4,6 @@
 <%@page import="org.springframework.web.context.WebApplicationContext"%>
 <%
 WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(config.getServletContext());
-JdbcTemplate erpJdbcTemplate  = (JdbcTemplate)context.getBean("jdbcTemplate");
+JdbcTemplate jdbcTemplate  = (JdbcTemplate)context.getBean("jdbcTemplate");
 Logger logger = Logger.getLogger("com.search");
 %>

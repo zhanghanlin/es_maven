@@ -11,13 +11,7 @@
                 "type": "long"
             },
             "name": {
-                "type": "string",
-                "store": "no",
-                "term_vector": "with_positions_offsets",
-                "indexAnalyzer": "ik",
-                "searchAnalyzer": "ik",
-                "include_in_all": "true",
-                "boost": 8
+                "type": "string"
             }
         }
     }
