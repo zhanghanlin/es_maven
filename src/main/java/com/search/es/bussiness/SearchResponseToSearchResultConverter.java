@@ -7,15 +7,15 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component(SearchResponseToSearchResultConverter.BEAN_ID)
-public class SearchResponseToSearchResultConverter implements
-		Converter<SearchResponse, SearchResult> {
+public class SearchResponseToSearchResultConverter<T> implements
+		Converter<SearchResponse, SearchResult<T>> {
 
 	protected final Log logger = LogFactory.getLog(getClass());
 
 	public static final String BEAN_ID = "searchResponseToSearchResultConverter";
 
 	@Override
-	public SearchResult convert(SearchResponse source) {
+	public SearchResult<T> convert(SearchResponse source) {
 		return null;
 	}
 }

@@ -18,7 +18,7 @@ import com.search.util.Constants;
 public abstract class ExtendFacade<T> {
 
 	protected final Log logger = LogFactory.getLog(getClass());
-	
+
 	@Autowired
 	private ElasticsearchNodeFactoryBean esNode;
 

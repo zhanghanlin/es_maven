@@ -6,13 +6,13 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.alibaba.fastjson.JSONObject;
-import com.search.bean.Product;
+import com.search.bean.Brand;
+import com.search.es.bussiness.BrandFacadeImpl;
 import com.search.es.bussiness.ProductFacadeImpl;
+import com.search.es.bussiness.SearchResult;
 import com.search.job.Job;
 
 /**
@@ -29,15 +29,19 @@ public class JunitTest {
 	Job job;
 
 	@Autowired
-	@Qualifier("productFacade")
 	ProductFacadeImpl productFacade;
+
+	@Autowired
+	BrandFacadeImpl brandFacade;
 
 	@Test
 	public void test() {
-		List<String> pidList = new ArrayList<String>();
-		pidList.add("8260");
-		job.flushProduct(pidList);
-		Product product = productFacade.get(8260L);
-		System.out.println(JSONObject.toJSONString(product));
+		List<String> list = new ArrayList<String>();
+		job.flushBrand(list);
+		SearchResult<Brand> srResult = brandFacade.getAll();
+		System.out.println(srResult.getTotalHits());
+		String key = "B";
+		List<Brand> date = brandFacade.associateWord(key);
+		System.out.println(date.size());
 	}
 }
