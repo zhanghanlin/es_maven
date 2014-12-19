@@ -1,3 +1,4 @@
+<%@page import="com.search.bean.Brand"%>
 <%@page import="java.util.List"%>
 <%@page import="com.alibaba.fastjson.JSONObject"%>
 <%@page import="com.search.es.BrandFacade"%>
@@ -8,4 +9,5 @@
 String key = request.getParameter("key");
 BrandFacadeImpl brandFacede = (BrandFacadeImpl)context.getBean(BrandFacade.BEAN_ID);
 List<Brand> items = brandFacede.associateWord(key);
+out.print(JSONObject.toJSONString(items));
 %>

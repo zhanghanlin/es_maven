@@ -1,4 +1,3 @@
-<%@page import="com.search.es.ElasticsearchNodeFactoryBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/common/context.jsp" %>
@@ -9,9 +8,32 @@
 <title>Index</title>
 </head>
 <body>
-<%
-org.elasticsearch.node.internal.InternalNode node = (org.elasticsearch.node.internal.InternalNode)context.getBean("esNode");
-out.print(node.getClass());
-%>
+<input type="text" id="value" />
+<input type="button" id="search" value="搜索"/>
+<div id="data"></div>
+<script type="text/javascript" src="http://js.imglefeng.com/js/jquery-1.6.4.min.js"></script>
+<script>
+$('#search').click(function(){
+	jumpToSearchBrand();
+})
+
+$("#value").bind("input propertychange", function() { 
+	jumpToSearchBrand();
+}); 
+function jumpToSearchBrand(){
+	var keyword = $("#value");
+	var keywordvalue = $.trim(keyword.val());
+	var keyword_utf8 = encodeURIComponent(keywordvalue);
+	var url = "interface/associat.jsp?key="+keyword_utf8;
+	var h = "";
+	$.getJSON(url, function(data) {
+		$.each(data,function(i,o) {
+			h += o.name + "<br/>";
+		});
+
+		$('#data').html(h);
+	})
+}
+</script>
 </body>
 </html>

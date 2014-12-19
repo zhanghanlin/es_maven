@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.elasticsearch.ElasticsearchException;
+import org.elasticsearch.action.admin.indices.mapping.put.PutMappingResponse;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.common.io.Streams;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,7 +82,9 @@ public class Job {
 					.copyToStringFromClasspath(Constants.ES_SEARCH_JSON_PATH
 							+ type + ".json");
 			try {
-				getEsClient().admin().indices()
+				@SuppressWarnings("unused")
+				PutMappingResponse mappingResponse = getEsClient().admin()
+						.indices()
 						.preparePutMapping(Constants.GLOBAL_INDEX_NAME)
 						.setType(type).setSource(mapping).execute().actionGet();
 			} catch (ElasticsearchException e) {

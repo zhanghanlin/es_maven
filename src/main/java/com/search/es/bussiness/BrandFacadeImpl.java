@@ -20,7 +20,6 @@ import com.search.bean.Brand;
 import com.search.es.BrandFacade;
 import com.search.es.ExtendFacade;
 import com.search.util.Constants;
-import com.search.util.StringUtils;
 
 /**
  * 品牌业务
@@ -55,17 +54,14 @@ public class BrandFacadeImpl extends ExtendFacade<Brand> implements BrandFacade 
 	 */
 	public List<Brand> associateWord(String key) {
 		BoolQueryBuilder bool = new BoolQueryBuilder();
-		if (StringUtils.isNotBlank(key)) {
-			MultiMatchQueryBuilder builder = QueryBuilders.multiMatchQuery(key,
-					"name.name_ik", "name.name_pinyin",
-					"name.name_pinyin_first_letter",
-					"name.name_lowercase_keyword_ngram_min_size1").operator(
-					MatchQueryBuilder.Operator.AND);
-			bool.must(builder);
-		}
+		MultiMatchQueryBuilder builder = QueryBuilders.multiMatchQuery(key,
+				"name.name_ik", "name.name_pinyin",
+				"name.name_pinyin_first_letter",
+				"name.name_lowercase_keyword_ngram_min_size1").operator(
+				MatchQueryBuilder.Operator.AND);
+		bool.must(builder);
 		SearchRequestBuilder srb = getBuilder().setTypes(BEAN_TYPE);
-		srb.setQuery(bool).addSort("id", SortOrder.DESC).setFrom(0)
-				.setSize(9999);
+		srb.setQuery(bool).setFrom(0).setSize(10);
 		SearchResponse searchResponse = srb.execute().actionGet();
 		getClient().close();
 		final SearchHits hits = searchResponse.getHits();
