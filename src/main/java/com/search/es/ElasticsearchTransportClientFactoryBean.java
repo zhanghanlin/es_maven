@@ -21,8 +21,8 @@ import org.springframework.beans.factory.InitializingBean;
  * 
  * @author Erez Mazor (erezmazor@gmail.com)
  */
-public class ElasticsearchTransportClientFactoryBean implements FactoryBean<TransportClient>, InitializingBean,
-		DisposableBean {
+public class ElasticsearchTransportClientFactoryBean implements
+		FactoryBean<TransportClient>, InitializingBean, DisposableBean {
 
 	protected final Log logger = LogFactory.getLog(getClass());
 
@@ -30,7 +30,8 @@ public class ElasticsearchTransportClientFactoryBean implements FactoryBean<Tran
 
 	private Map<String, Integer> transportAddresses;
 
-	public void setTransportAddresses(final Map<String, Integer> transportAddresses) {
+	public void setTransportAddresses(
+			final Map<String, Integer> transportAddresses) {
 		this.transportAddresses = transportAddresses;
 	}
 
@@ -43,11 +44,14 @@ public class ElasticsearchTransportClientFactoryBean implements FactoryBean<Tran
 		final TransportClient client = new TransportClient();
 
 		if (null != transportAddresses) {
-			for (final Entry<String, Integer> address : transportAddresses.entrySet()) {
+			for (final Entry<String, Integer> address : transportAddresses
+					.entrySet()) {
 				if (logger.isInfoEnabled()) {
-					logger.info("Adding transport address: " + address.getKey() + " port: " + address.getValue());
+					logger.info("Adding transport address: " + address.getKey()
+							+ " port: " + address.getValue());
 				}
-				client.addTransportAddress(new InetSocketTransportAddress(address.getKey(), address.getValue()));
+				client.addTransportAddress(new InetSocketTransportAddress(
+						address.getKey(), address.getValue()));
 			}
 		}
 

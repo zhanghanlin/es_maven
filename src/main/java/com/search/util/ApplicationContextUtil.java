@@ -1,6 +1,7 @@
 package com.search.util;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -22,7 +23,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * </P>
  */
 public class ApplicationContextUtil implements ApplicationContextAware {
-	final static Logger LOG = Logger.getLogger(ApplicationContextUtil.class);
+
+	final static Log logger = LogFactory.getLog(ApplicationContextUtil.class);
+
 	private static ApplicationContext context;// 声明一个静态变量保存
 
 	@SuppressWarnings("static-access")
@@ -91,7 +94,7 @@ public class ApplicationContextUtil implements ApplicationContextAware {
 		if (context == null) {
 			context = new ClassPathXmlApplicationContext(
 					"classpath:application*.xml");
-			LOG.debug("Manual load spring config");
+			logger.debug("Manual load spring config");
 		}
 	}
 }

@@ -1,7 +1,5 @@
 package com.search.es.bussiness;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.elasticsearch.action.get.GetResponse;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +16,8 @@ import com.search.util.Constants;
  *
  */
 @Service(ProductFacade.BEAN_ID)
-public class ProductFacadeImpl extends ExtendFacade<Product> implements ProductFacade {
-	
-	protected final Log logger = LogFactory.getLog(getClass());
+public class ProductFacadeImpl extends ExtendFacade<Product> implements
+		ProductFacade {
 
 	@Override
 	public Product get(Long id) {

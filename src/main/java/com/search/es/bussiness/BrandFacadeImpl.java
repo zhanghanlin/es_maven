@@ -1,7 +1,5 @@
 package com.search.es.bussiness;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.elasticsearch.action.get.GetResponse;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +17,7 @@ import com.search.util.Constants;
  */
 @Service(BrandFacade.BEAN_ID)
 public class BrandFacadeImpl extends ExtendFacade<Brand> implements BrandFacade {
-	
-	protected final Log logger = LogFactory.getLog(getClass());
-	
+
 	@Override
 	public Brand get(Long id) {
 		Brand brand = null;

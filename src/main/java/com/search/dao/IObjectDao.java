@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @param <T>
  */
-public interface IBeanDao<T> {
+public interface IObjectDao<T> {
 	
 	/**
 	 * 查询所有

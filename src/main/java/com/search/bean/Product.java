@@ -1,7 +1,5 @@
 package com.search.bean;
 
-
-
 /**
  * 商品对象
  * 

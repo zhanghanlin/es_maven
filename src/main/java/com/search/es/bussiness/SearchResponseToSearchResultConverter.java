@@ -16,6 +16,6 @@ public class SearchResponseToSearchResultConverter implements
 
 	@Override
 	public SearchResult convert(SearchResponse source) {
-		return null;	
+		return null;
 	}
 }

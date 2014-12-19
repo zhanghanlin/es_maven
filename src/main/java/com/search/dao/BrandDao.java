@@ -9,11 +9,12 @@ import com.search.bean.Brand;
 
 /**
  * 品牌DAO
+ * 
  * @author zhanghanlin
  *
  */
 @Component
-public class BrandDao extends SqlSessionDaoSupport implements IBeanDao<Brand> {
+public class BrandDao extends SqlSessionDaoSupport implements IObjectDao<Brand> {
 
 	@Override
 	public List<Brand> searchAll() {

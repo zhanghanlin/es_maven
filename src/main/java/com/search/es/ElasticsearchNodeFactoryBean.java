@@ -36,7 +36,8 @@ import org.springframework.core.io.Resource;
  * 
  * @author Erez Mazor (erezmazor@gmail.com)
  */
-public class ElasticsearchNodeFactoryBean implements FactoryBean<Node>, InitializingBean, DisposableBean {
+public class ElasticsearchNodeFactoryBean implements FactoryBean<Node>,
+		InitializingBean, DisposableBean {
 
 	protected final Log logger = LogFactory.getLog(getClass());
 
@@ -85,17 +86,20 @@ public class ElasticsearchNodeFactoryBean implements FactoryBean<Node>, Initiali
 		node = nodeBuilder.node();
 	}
 
-	private void internalLoadSettings(final NodeBuilder nodeBuilder, final Resource configLocation) {
+	private void internalLoadSettings(final NodeBuilder nodeBuilder,
+			final Resource configLocation) {
 
 		try {
 			final String filename = configLocation.getFilename();
 			if (logger.isInfoEnabled()) {
 				logger.info("Loading configuration file from: " + filename);
 			}
-			nodeBuilder.getSettings().loadFromStream(filename, configLocation.getInputStream());
+			nodeBuilder.getSettings().loadFromStream(filename,
+					configLocation.getInputStream());
 		} catch (final Exception e) {
-			throw new IllegalArgumentException("Could not load settings from configLocation: "
-					+ configLocation.getDescription(), e);
+			throw new IllegalArgumentException(
+					"Could not load settings from configLocation: "
+							+ configLocation.getDescription(), e);
 		}
 	}
 

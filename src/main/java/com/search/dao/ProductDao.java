@@ -15,7 +15,7 @@ import com.search.bean.Product;
  */
 @Component
 public class ProductDao extends SqlSessionDaoSupport implements
-		IBeanDao<Product> {
+		IObjectDao<Product> {
 
 	@Override
 	public List<Product> searchAll() {
