@@ -34,20 +34,37 @@ es_maven
 7.	未解决问题
 		
 		注入bean：esNode
-		```
+
+```xml
 		<bean id="esNode" class="com.search.es.ElasticsearchNodeFactoryBean">
 			<property name="configLocation" value="classpath:conf/elasticsearch.properties" />
 		</bean>
-		```
+```
 		
 		Java Bean使用该Bean
-		```
+		
+```java
 		@Autowired
 		ElasticsearchNodeFactoryBean esNode;
-		```
+
+		private Client esClient;
+	
+		public Client getEsClient() {
+			if (esClient == null) {
+				try {
+					esClient = esNode.getObject().client();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			return esClient;
+		}
+```
 		
 		JSP使用该Bean
-		```
+		
+```java
 		InternalNode node = (InternalNode)context.getBean("esNode");
 		Client esclient = node.client();
-		```
+```
