@@ -1,8 +1,8 @@
 es_maven
 ========
-1.	测试该框架需要有依赖服务
+1.测试该框架需要有依赖服务
 	
-	1.1 elasticsearch-rtf
+1.1 elasticsearch-rtf
 		
 * [GitHub:https://github.com/medcl/elasticsearch-rtf](https://github.com/medcl/elasticsearch-rtf/)
 		
@@ -16,17 +16,17 @@ es_maven
 
 *存在表p_brand[id,name]
 
-2.	ojdbc14 Jar包
+2.ojdbc14 Jar包
 		
 *由于Oracle限制ojdbc14需要自行下载
 
 ojdbc14包路径/lib/ojdbc14-10.2.0.3.0.jar
 
-3.	启动脚本
+3.启动脚本
 		
 *在项目根目录执行：jettyTest.bat
 
-4.	初始化数据
+4.初始化数据
 		
 *根据DB初始化(需要依赖上述Oracle服务)
 
@@ -36,15 +36,15 @@ ojdbc14包路径/lib/ojdbc14-10.2.0.3.0.jar
 
 访问URL:[http://localhost:8081/es_maven/init/test/init.jsp](http://localhost:8081/es_maven/init/test/init.jsp)
 
-5.	查看数据
+5.查看数据
 		
 * 访问URL:http://localhost:8081/es_maven/interface/get.jsp?id=$id&type=$type
 
-6.	自动完成示例
+6.自动完成示例
 
 * 访问URL:[http://localhost:8081/es_maven/index.jsp](http://localhost:8081/es_maven/index.jsp)
 
-7.	未解决问题
+7.未解决问题
 		
 		注入bean：esNode
 
