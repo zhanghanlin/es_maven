@@ -13,10 +13,15 @@
 <%@page import="com.sun.jersey.api.client.WebResource"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/common/context.jsp" %>
+<script type="text/javascript" src="../../js/jquery-1.11.2.js"></script>
+<body>
 <%
 /**************************************/
 /*				Init Data	 		  */
 /**************************************/
+String type = request.getParameter("type");
+String o = "";
+if(StringUtils.isNotBlank(type)) {
 InternalNode esNode = (InternalNode)context.getBean("esNode");
 Client esClient = esNode.client();
 try {
@@ -70,4 +75,15 @@ for(int i = 0; i < brandCount;i++){
 	String pjson = JSON.toJSON(t).toString();
 	wr.put(pjson);
 }
+o = "{\"info\":\"Success\"}";
+}
 %>
+<input type="button" id="init" value="init"/>
+<div id="data"><%=o %></div>
+<script type="text/javascript" src="../../js/jquery-1.11.2.js"></script>
+<script>
+$('#init').click(function(){
+	window.location.href = 'init.jsp?type=init';
+});
+</script>
+</body>
