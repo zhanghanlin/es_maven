@@ -1,3 +1,4 @@
+<%@page import="com.search.util.StringUtils"%>
 <%@page import="com.search.bean.Brand"%>
 <%@page import="java.util.List"%>
 <%@page import="com.alibaba.fastjson.JSONObject"%>
@@ -7,7 +8,11 @@
 <%@ include file="/common/context.jsp" %>
 <%
 String key = request.getParameter("key");
-BrandFacadeImpl brandFacede = (BrandFacadeImpl)context.getBean(BrandFacade.BEAN_ID);
-List<Brand> items = brandFacede.associateWord(key);
-out.print(JSONObject.toJSONString(items));
+if(StringUtils.isNotBlank(key)) {
+	BrandFacadeImpl brandFacede = (BrandFacadeImpl)context.getBean(BrandFacade.BEAN_ID);
+	List<Brand> items = brandFacede.associateWord(key);
+	out.print(JSONObject.toJSONString(items));
+} else {
+	out.print("{}");
+}
 %>
