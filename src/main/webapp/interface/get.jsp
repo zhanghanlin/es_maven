@@ -15,7 +15,7 @@ try{
 	if ("product".equals(type)) {
 		ProductFacadeImpl productFacade = (ProductFacadeImpl)context.getBean(ProductFacade.BEAN_ID);
 		t = productFacade.get(id);
-	} else if ("product".equals(type)) {
+	} else if ("brand".equals(type)) {
 		BrandFacadeImpl brandFacadeImpl = (BrandFacadeImpl)context.getBean(BrandFacade.BEAN_ID);
 		t = brandFacadeImpl.get(id);
 	}
