@@ -11,7 +11,7 @@
 <input type="text" id="value" />
 <input type="button" id="search" value="搜索"/>
 <div id="data"></div>
-<script type="text/javascript" src="http://js.imglefeng.com/js/jquery-1.6.4.min.js"></script>
+<script type="text/javascript" src="js/jquery-1.11.2.js"></script>
 <script>
 $('#search').click(function(){
 	jumpToSearchBrand();
