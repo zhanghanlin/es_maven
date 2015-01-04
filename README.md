@@ -46,6 +46,20 @@ es_maven
 ```java
 		@Autowired
 		ElasticsearchNodeFactoryBean esNode;
+
+		private Client esClient;
+	
+		public Client getEsClient() {
+			if (esClient == null) {
+				try {
+					esClient = esNode.getObject().client();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			return esClient;
+		}
 ```
 		
 		JSP使用该Bean
