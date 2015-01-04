@@ -4,11 +4,11 @@ es_maven
 	
 	1.1 elasticsearch-rtf
 		
-[GitHub:https://github.com/medcl/elasticsearch-rtf](https://github.com/medcl/elasticsearch-rtf/)
+		[GitHub:https://github.com/medcl/elasticsearch-rtf](https://github.com/medcl/elasticsearch-rtf/)
 		
-启动elasticsearch后进入[http://localhost:9200/_plugin/rtf/](http://localhost:9200/_plugin/rtf/)
+		启动elasticsearch后进入[http://localhost:9200/_plugin/rtf/](http://localhost:9200/_plugin/rtf/)
 		
-点击New Index ,名称为es_search
+		点击New Index ,名称为es_search
 	1.2 Oracle
 		
 		存在表p_product[id,name]
