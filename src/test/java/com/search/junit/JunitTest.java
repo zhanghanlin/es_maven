@@ -40,9 +40,8 @@ public class JunitTest {
 		job.flushBrand(list);
 		SearchResult<Brand> srResult = brandFacade.getAll();
 		System.out.println(srResult.getTotalHits());
-		String key = "Jplus";
-		SearchResult<Brand> sr = brandFacade.search(key);
-		List<Brand> data = sr.getItems();
+		String key = "test";
+		List<Brand> data = brandFacade.associateWord(key);
 		for (Brand brand : data) {
 			System.out.println(brand.getName());
 		}

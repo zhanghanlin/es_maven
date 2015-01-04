@@ -34,8 +34,6 @@ import com.search.util.Constants;
 @Service(BrandFacade.BEAN_ID)
 public class BrandFacadeImpl extends ExtendFacade<Brand> implements BrandFacade {
 
-	private final String BEAN_TYPE = "brand";
-
 	@Override
 	public Brand get(Long id) {
 		Brand brand = null;
@@ -51,58 +49,13 @@ public class BrandFacadeImpl extends ExtendFacade<Brand> implements BrandFacade 
 	}
 
 	/**
-	 * 联想搜索
+	 * 自动完成
 	 * 
 	 * @param key
 	 * @return
 	 */
 	public List<Brand> associateWord(String key) {
-		BoolQueryBuilder bool = new BoolQueryBuilder();
-		MultiMatchQueryBuilder builder = QueryBuilders.multiMatchQuery(key,
-				highlightedFields).operator(MatchQueryBuilder.Operator.AND);
-		bool.must(builder);
-		SearchRequestBuilder srb = getBuilder().setTypes(BEAN_TYPE);
-		// 设置查询类型
-		// 1.SearchType.DFS_QUERY_THEN_FETCH = 精确查询
-		// 2.SearchType.SCAN =扫描查询,无序
-		srb.setSearchType(SearchType.DFS_QUERY_THEN_FETCH);
-		// 设置查询条件
-		srb.setQuery(bool);
-		// 分页应用
-		srb.setFrom(0).setSize(10);
-		// 设置是否按查询匹配度排序
-		srb.setExplain(true);
-		// 设置高亮显示
-		for (int i = 0; i < highlightedFields.length; i++) {
-			srb.addHighlightedField(highlightedFields[i]);
-		}
-		srb.setHighlighterPreTags("<span style=\"color:red\">");
-		srb.setHighlighterPostTags("</span>");
-		SearchResponse searchResponse = srb.execute().actionGet();
-		getClient().close();
-		final SearchHits hits = searchResponse.getHits();
-		List<Brand> items = new ArrayList<Brand>();
-		for (final SearchHit searchHit : hits.getHits()) {
-			final Brand brand = JSON.parseObject(searchHit.getSourceAsString(),
-					Brand.class);
-			// 获取对应的高亮域
-			Map<String, HighlightField> hig = searchHit.highlightFields();
-			// 从设定的高亮域中取得指定域
-			HighlightField nameField = getHighlightField(hig);
-			if (nameField != null) {
-				// 取得定义的高亮标签
-				Text[] nameTexts = nameField.fragments();
-				String name = "";
-				// 为name串值增加自定义的高亮标签
-				for (Text text : nameTexts) {
-					name += text;
-				}
-				// 将追加了高亮标签的串值重新填充到对应的对象
-				brand.setName(name);
-			}
-			items.add(brand);
-		}
-		return items;
+		return search(key, 1, 10).getItems();
 	}
 
 	/**
@@ -111,7 +64,7 @@ public class BrandFacadeImpl extends ExtendFacade<Brand> implements BrandFacade 
 	 * @param key
 	 * @return
 	 */
-	public SearchResult<Brand> search(String key) {
+	public SearchResult<Brand> search(String key, int pageNo, int pageSize) {
 		final SearchResult<Brand> searchResult = new SearchResult<Brand>();
 		BoolQueryBuilder bool = new BoolQueryBuilder();
 		MultiMatchQueryBuilder builder = QueryBuilders.multiMatchQuery(key,
@@ -125,7 +78,7 @@ public class BrandFacadeImpl extends ExtendFacade<Brand> implements BrandFacade 
 		// 设置查询条件
 		srb.setQuery(bool);
 		// 分页应用
-		srb.setFrom(0).setSize(10);
+		srb.setFrom((pageNo - 1) * pageSize).setSize(pageNo * pageSize);
 		// 设置是否按查询匹配度排序
 		srb.setExplain(false);
 		// 设置高亮显示

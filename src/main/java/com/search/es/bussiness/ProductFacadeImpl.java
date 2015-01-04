@@ -23,7 +23,7 @@ public class ProductFacadeImpl extends ExtendFacade<Product> implements
 	public Product get(Long id) {
 		Product product = null;
 		GetResponse gp = getClient()
-				.prepareGet(Constants.GLOBAL_INDEX_NAME, "product",
+				.prepareGet(Constants.GLOBAL_INDEX_NAME, BEAN_TYPE,
 						id.toString()).execute().actionGet();
 		if (gp.isExists()) {
 			product = JSON.parseObject(gp.getSourceAsString(), Product.class);
