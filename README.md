@@ -2,7 +2,7 @@ es_maven
 ========
 1.测试该框架需要有依赖服务
 	
-1.1 elasticsearch-rtf
+elasticsearch-rtf
 		
 * [GitHub:https://github.com/medcl/elasticsearch-rtf](https://github.com/medcl/elasticsearch-rtf/)
 		
@@ -10,7 +10,7 @@ es_maven
 		
 * 点击New Index ,名称为es_search
 
-1.2 Oracle
+Oracle
 		
 * 存在表p_product[id,name]
 
@@ -20,7 +20,7 @@ es_maven
 		
 * 由于Oracle限制ojdbc14需要自行下载
 
-ojdbc14包路径/lib/ojdbc14-10.2.0.3.0.jar
+* ojdbc14包路径/lib/ojdbc14-10.2.0.3.0.jar
 
 3.启动脚本
 		
@@ -30,11 +30,11 @@ ojdbc14包路径/lib/ojdbc14-10.2.0.3.0.jar
 		
 * 根据DB初始化(需要依赖上述Oracle服务)
 
-访问URL:http://localhost:8081/es_maven/init/init.jsp?ids=$ids&type=$type
+* 访问URL:http://localhost:8081/es_maven/init/init.jsp?ids=$ids&type=$type
 		
 * Test数据Init
 
-访问URL:[http://localhost:8081/es_maven/init/test/init.jsp](http://localhost:8081/es_maven/init/test/init.jsp)
+* 访问URL:[http://localhost:8081/es_maven/init/test/init.jsp](http://localhost:8081/es_maven/init/test/init.jsp)
 
 5.查看数据
 		
@@ -44,7 +44,7 @@ ojdbc14包路径/lib/ojdbc14-10.2.0.3.0.jar
 
 * 访问URL:[http://localhost:8081/es_maven/index.jsp](http://localhost:8081/es_maven/index.jsp)
 
-7.未解决问题
+7.需要注意问题
 		
 		注入bean：esNode
 
