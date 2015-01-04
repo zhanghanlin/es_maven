@@ -1,3 +1,9 @@
+<%@page import="java.io.IOException"%>
+<%@page import="org.elasticsearch.ElasticsearchException"%>
+<%@page import="org.elasticsearch.action.admin.indices.mapping.put.PutMappingResponse"%>
+<%@page import="org.elasticsearch.common.io.Streams"%>
+<%@page import="org.elasticsearch.client.Client"%>
+<%@page import="org.elasticsearch.node.internal.InternalNode"%>
 <%@page import="com.search.bean.Brand"%>
 <%@page import="com.search.bean.Product"%>
 <%@page import="com.search.util.StringUtils"%>
@@ -8,6 +14,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/common/context.jsp" %>
 <%
+/**************************************/
+/*				Init Data	 		  */
+/**************************************/
+InternalNode esNode = (InternalNode)context.getBean("esNode");
+Client esClient = esNode.client();
+try {
+	String proMapping = Streams
+			.copyToStringFromClasspath(Constants.ES_SEARCH_JSON_PATH
+					+ "product.json");
+	String brandMapping = Streams
+			.copyToStringFromClasspath(Constants.ES_SEARCH_JSON_PATH
+					+ "brand.json");
+	try {
+		PutMappingResponse proMappingResponse = esClient.admin()
+				.indices()
+				.preparePutMapping(Constants.GLOBAL_INDEX_NAME)
+				.setType("product").setSource(proMapping).execute().actionGet();
+		PutMappingResponse brandMappingResponse = esClient.admin()
+				.indices()
+				.preparePutMapping(Constants.GLOBAL_INDEX_NAME)
+				.setType("brand").setSource(brandMapping).execute().actionGet();
+	} catch (ElasticsearchException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+} catch (IOException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}
+WebResource client = Jerseys.createClient(Constants.BASE_URL);
 int proCount = 100;
 for(int i = 0; i < proCount;i++){
 	Product t = new Product();
@@ -15,7 +54,6 @@ for(int i = 0; i < proCount;i++){
 	String name = "p" + StringUtils.randomChinese(5);
 	t.setId(Long.valueOf(id));
 	t.setName(name);
-	WebResource client = Jerseys.createClient(Constants.BASE_URL);
 	WebResource wr = client.path("/" + Constants.GLOBAL_INDEX_NAME + "/product/" + id);
 	String pjson = JSON.toJSON(t).toString();
 	wr.put(pjson);
@@ -28,7 +66,6 @@ for(int i = 0; i < brandCount;i++){
 	String name ="b" +  StringUtils.randomChinese(4);
 	t.setId(Long.valueOf(id));
 	t.setName(name);
-	WebResource client = Jerseys.createClient(Constants.BASE_URL);
 	WebResource wr = client.path("/" + Constants.GLOBAL_INDEX_NAME + "/brand/" + id);
 	String pjson = JSON.toJSON(t).toString();
 	wr.put(pjson);
