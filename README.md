@@ -31,3 +31,23 @@ es_maven
 6.	自动完成示例
 
 		访问URL:http://localhost:8081/es_maven/index.jsp
+7.	未解决问题
+		
+		注入bean：esNode
+		```xml
+		<bean id="esNode" class="com.search.es.ElasticsearchNodeFactoryBean">
+			<property name="configLocation" value="classpath:conf/elasticsearch.properties" />
+		</bean>
+		```
+		
+		Java Bean使用该Bean
+		```java
+		@Autowired
+		ElasticsearchNodeFactoryBean esNode;
+		```
+		
+		JSP使用该Bean
+		```java
+		InternalNode node = (InternalNode)context.getBean("esNode");
+		Client esclient = node.client();
+		```
