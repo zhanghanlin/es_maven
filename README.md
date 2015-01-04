@@ -34,6 +34,7 @@ es_maven
 7.	未解决问题
 		
 		注入bean：esNode
+
 		```
 		<bean id="esNode" class="com.search.es.ElasticsearchNodeFactoryBean">
 			<property name="configLocation" value="classpath:conf/elasticsearch.properties" />
@@ -41,12 +42,14 @@ es_maven
 		```
 		
 		Java Bean使用该Bean
+		
 		```
 		@Autowired
 		ElasticsearchNodeFactoryBean esNode;
 		```
 		
 		JSP使用该Bean
+		
 		```
 		InternalNode node = (InternalNode)context.getBean("esNode");
 		Client esclient = node.client();
