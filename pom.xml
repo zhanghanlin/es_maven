@@ -203,18 +203,20 @@
 			<version>${log4j.version}</version>
 		</dependency>
 		<!-- ojdbc14 -->
-		<!-- <dependency>
+		<!-- 
+		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc14</artifactId>
 			<version>${ojdbc14.version}</version>
-		</dependency> -->
+		</dependency>
+		-->
 		<dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc14</artifactId>
-            <version>${ojdbc14.version}</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/ojdbc14-10.2.0.3.0.jar</systemPath>
-        </dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc14</artifactId>
+			<version>${ojdbc14.version}</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/ojdbc14-10.2.0.3.0.jar</systemPath>
+		</dependency>
 		<!-- ojdbc14 -->
 		<dependency>
 			<groupId>com.googlecode.log4jdbc</groupId>
