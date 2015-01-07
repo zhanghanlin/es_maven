@@ -24,6 +24,7 @@ import com.search.bean.Brand;
 import com.search.es.BrandFacade;
 import com.search.es.ExtendFacade;
 import com.search.util.Constants;
+import com.search.util.StringUtils;
 
 /**
  * 品牌业务
@@ -52,19 +53,30 @@ public class BrandFacadeImpl extends ExtendFacade<Brand> implements BrandFacade 
 	 * 自动完成
 	 * 
 	 * @param key
-	 * @return
+	 *            搜索Key
+	 * @return List<Brand>
 	 */
 	public List<Brand> associateWord(String key) {
-		return search(key, 1, 10).getItems();
+		return search(key, "", SortOrder.DESC, 1, 10).getItems();
 	}
 
 	/**
 	 * 搜索使用
 	 * 
 	 * @param key
-	 * @return
+	 *            搜索Key
+	 * @param sort
+	 *            排序字段
+	 * @param order
+	 *            排序顺序
+	 * @param pageNo
+	 *            页码
+	 * @param pageSize
+	 *            每页数据数
+	 * @return SearchResult<Brand>
 	 */
-	public SearchResult<Brand> search(String key, int pageNo, int pageSize) {
+	public SearchResult<Brand> search(String key, String sort, SortOrder order,
+			int pageNo, int pageSize) {
 		final SearchResult<Brand> searchResult = new SearchResult<Brand>();
 		BoolQueryBuilder bool = new BoolQueryBuilder();
 		MultiMatchQueryBuilder builder = QueryBuilders.multiMatchQuery(key,
@@ -73,10 +85,14 @@ public class BrandFacadeImpl extends ExtendFacade<Brand> implements BrandFacade 
 		SearchRequestBuilder srb = getBuilder().setTypes(BEAN_TYPE);
 		// 设置查询类型
 		// 1.SearchType.DFS_QUERY_THEN_FETCH = 精确查询
-		// 2.SearchType.SCAN =扫描查询,无序
+		// 2.SearchType.SCAN = 扫描查询,无序
 		srb.setSearchType(SearchType.DFS_QUERY_THEN_FETCH);
 		// 设置查询条件
 		srb.setQuery(bool);
+		if (StringUtils.isNotBlank(sort)) {
+			// 排序
+			srb.addSort(sort, order);
+		}
 		// 分页应用
 		srb.setFrom((pageNo - 1) * pageSize).setSize(pageNo * pageSize);
 		// 设置是否按查询匹配度排序
