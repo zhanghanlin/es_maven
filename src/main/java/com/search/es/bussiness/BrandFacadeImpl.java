@@ -24,7 +24,6 @@ import com.search.bean.Brand;
 import com.search.es.BrandFacade;
 import com.search.es.ExtendFacade;
 import com.search.util.Constants;
-import com.search.util.StringUtils;
 
 /**
  * 品牌业务
@@ -57,7 +56,7 @@ public class BrandFacadeImpl extends ExtendFacade<Brand> implements BrandFacade 
 	 * @return List<Brand>
 	 */
 	public List<Brand> associateWord(String key) {
-		return search(key, "", SortOrder.DESC, 1, 10).getItems();
+		return search(key, 10).getItems();
 	}
 
 	/**
@@ -65,18 +64,11 @@ public class BrandFacadeImpl extends ExtendFacade<Brand> implements BrandFacade 
 	 * 
 	 * @param key
 	 *            搜索Key
-	 * @param sort
-	 *            排序字段
-	 * @param order
-	 *            排序顺序
-	 * @param pageNo
-	 *            页码
-	 * @param pageSize
-	 *            每页数据数
+	 * @param count
+	 *            返回数据数
 	 * @return SearchResult<Brand>
 	 */
-	public SearchResult<Brand> search(String key, String sort, SortOrder order,
-			int pageNo, int pageSize) {
+	public SearchResult<Brand> search(String key, int count) {
 		final SearchResult<Brand> searchResult = new SearchResult<Brand>();
 		BoolQueryBuilder bool = new BoolQueryBuilder();
 		MultiMatchQueryBuilder builder = QueryBuilders.multiMatchQuery(key,
@@ -89,19 +81,15 @@ public class BrandFacadeImpl extends ExtendFacade<Brand> implements BrandFacade 
 		srb.setSearchType(SearchType.DFS_QUERY_THEN_FETCH);
 		// 设置查询条件
 		srb.setQuery(bool);
-		if (StringUtils.isNotBlank(sort)) {
-			// 排序
-			srb.addSort(sort, order);
-		}
 		// 分页应用
-		srb.setFrom((pageNo - 1) * pageSize).setSize(pageNo * pageSize);
+		srb.setFrom(0).setSize(count);
 		// 设置是否按查询匹配度排序
 		srb.setExplain(false);
 		// 设置高亮显示
 		for (int i = 0; i < highlightedFields.length; i++) {
 			srb.addHighlightedField(highlightedFields[i]);
 		}
-		srb.setHighlighterPreTags("<span style=\"color:red\">");
+		srb.setHighlighterPreTags("<span style='color:red'>");
 		srb.setHighlighterPostTags("</span>");
 		SearchResponse searchResponse = srb.execute().actionGet();
 		getClient().close();
