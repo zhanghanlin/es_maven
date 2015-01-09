@@ -1,10 +1,11 @@
 package com.search.util;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.joda.time.DateTime;
 
 public class StringUtils extends org.apache.commons.lang.StringUtils {
 
@@ -110,8 +111,8 @@ public class StringUtils extends org.apache.commons.lang.StringUtils {
 		if (date == null) {
 			return "";
 		}
-		SimpleDateFormat sdf = new SimpleDateFormat(format);
-		return sdf.format(date);
+		DateTime dateTime = new DateTime(date);
+		return dateTime.toString(format);
 	}
 
 	/**
