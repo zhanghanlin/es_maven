@@ -1,12 +1,12 @@
 es_maven
 ========
-1. 测试该框架需要有依赖服务  
-elasticsearch-rtf  
-* GitHub:[https://github.com/medcl/elasticsearch-rtf](https://github.com/medcl/elasticsearch-rtf/)  
-* 下载elasticsearch-rtf服务后需要将elasticsearch.yml配置文件替换为项目中的bak/elasticsearch.yml,具体修改请自行比对  
-* bak/elasticsearch.yml中需要将$RedisIP替换为配置的Reids的IP, $RedisPort需要替换为Redis的端口  
-* 启动elasticsearch后进入[http://localhost:9200/_plugin/rtf/](http://localhost:9200/_plugin/rtf/)  
-* 点击New Index ,名称为es_search
+* 测试该框架需要有依赖服务  
+	* elasticsearch-rtf  
+	* GitHub:[https://github.com/medcl/elasticsearch-rtf](https://github.com/medcl/elasticsearch-rtf/)  
+	* 下载elasticsearch-rtf服务后需要将elasticsearch.yml配置文件替换为项目中的bak/elasticsearch.yml,具体修改请自行比对  
+	* bak/elasticsearch.yml中需要将$RedisIP替换为配置的Reids的IP, $RedisPort需要替换为Redis的端口  
+	* 启动elasticsearch后进入[http://localhost:9200/_plugin/rtf/](http://localhost:9200/_plugin/rtf/)  
+	* 点击New Index ,名称为es_search
 
 Oracle
 		
