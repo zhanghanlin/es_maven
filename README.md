@@ -1,24 +1,19 @@
 es_maven
 ========
 * 测试该框架需要有依赖服务  
-	* elasticsearch-rtf  
-	* GitHub:[https://github.com/medcl/elasticsearch-rtf](https://github.com/medcl/elasticsearch-rtf/)  
+	* elasticsearch-rtf：GitHub:[elasticsearch-rtf](https://github.com/medcl/elasticsearch-rtf/)  
 	* 下载elasticsearch-rtf服务后需要将elasticsearch.yml配置文件替换为项目中的bak/elasticsearch.yml,具体修改请自行比对  
 	* bak/elasticsearch.yml中需要将$RedisIP替换为配置的Reids的IP, $RedisPort需要替换为Redis的端口  
 	* 启动elasticsearch后进入[http://localhost:9200/_plugin/rtf/](http://localhost:9200/_plugin/rtf/)  
 	* 点击New Index ,名称为es_search
 
-Oracle
-		
-* 存在表p_product[id,name]
+* Oracle  
+	* 表p_product[id,name]  
+	* 表p_brand[id,name]
 
-* 存在表p_brand[id,name]
-
-2.ojdbc14 Jar包
-		
-* 由于Oracle限制ojdbc14需要自行下载
-
-* ojdbc14包路径/lib/ojdbc14-10.2.0.3.0.jar
+* ojdbc14 Jar包  
+	> 由于Oracle限制ojdbc14需要自行下载  
+	> ojdbc14包路径/lib/ojdbc14-10.2.0.3.0.jar
 
 3.启动脚本
 		
