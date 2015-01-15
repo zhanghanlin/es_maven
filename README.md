@@ -12,25 +12,23 @@ es_maven
 	* 表p_brand[id,name]
 
 * ojdbc14 Jar包  
-	> 由于Oracle限制ojdbc14需要自行下载  
-	> ojdbc14包路径/lib/ojdbc14-10.2.0.3.0.jar
+	* 由于Oracle限制ojdbc14需要自行下载  
+	* ojdbc14包路径/lib/ojdbc14-10.2.0.3.0.jar
 
 * 启动脚本  
-	> 在项目根目录执行：jettyTest.bat
+	* 在项目根目录执行：jettyTest.bat
 
 * 初始化数据  
-	> 根据DB初始化(需要依赖上述Oracle服务)  
-		> 访问URL:http://localhost:8081/es_maven/init/init.jsp?ids=$ids&type=$type  
-	> Test数据Init  
-		> 访问URL:[http://localhost:8081/es_maven/init/test/init.jsp](http://localhost:8081/es_maven/init/test/init.jsp)
+	* 根据DB初始化(需要依赖上述Oracle服务)  
+		* 访问URL:http://localhost:8081/es_maven/init/init.jsp?ids=$ids&type=$type  
+	* Test数据Init  
+		* 访问URL:[http://localhost:8081/es_maven/init/test/init.jsp](http://localhost:8081/es_maven/init/test/init.jsp)
 
-* 查看数据
+* 查看数据  
+	* 访问URL:http://localhost:8081/es_maven/interface/get.jsp?id=$id&type=$type
 
-	> 访问URL:http://localhost:8081/es_maven/interface/get.jsp?id=$id&type=$type
-
-* 自动完成示例
-
-	> 访问URL:[http://localhost:8081/es_maven/index.jsp](http://localhost:8081/es_maven/index.jsp)
+* 自动完成示例  
+	* 访问URL:[http://localhost:8081/es_maven/index.jsp](http://localhost:8081/es_maven/index.jsp)
 
 * 需要注意问题  
 	* 注入bean：esNode  
