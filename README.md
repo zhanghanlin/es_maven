@@ -36,7 +36,7 @@ es_maven
 		<bean id="esNode" class="com.search.es.ElasticsearchNodeFactoryBean">
 			<property name="configLocation" value="classpath:conf/elasticsearch.properties" />
 		</bean>
-```
+```  
 	* Java Bean使用该Bean  
 ```java
 		@Autowired
@@ -55,7 +55,7 @@ es_maven
 			}
 			return esClient;
 		}
-```
+```  
 	* JSP使用该Bean  
 ```java
 		InternalNode node = (InternalNode)context.getBean("esNode");
