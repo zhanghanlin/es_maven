@@ -24,13 +24,15 @@ es_maven
 	> Test数据Init  
 		> 访问URL:[http://localhost:8081/es_maven/init/test/init.jsp](http://localhost:8081/es_maven/init/test/init.jsp)
 
-* 查看数据  
+* 查看数据
+
 	> 访问URL:http://localhost:8081/es_maven/interface/get.jsp?id=$id&type=$type
 
-* 自动完成示例  
+* 自动完成示例
+
 	> 访问URL:[http://localhost:8081/es_maven/index.jsp](http://localhost:8081/es_maven/index.jsp)
 
-* 需要注意问题
+* 需要注意问题  
 	* 注入bean：esNode  
 ```xml
 		<bean id="esNode" class="com.search.es.ElasticsearchNodeFactoryBean">
