@@ -15,40 +15,29 @@ es_maven
 	> 由于Oracle限制ojdbc14需要自行下载  
 	> ojdbc14包路径/lib/ojdbc14-10.2.0.3.0.jar
 
-3.启动脚本
-		
-* 在项目根目录执行：jettyTest.bat
+* 启动脚本  
+	> 在项目根目录执行：jettyTest.bat
 
-4.初始化数据
-		
-* 根据DB初始化(需要依赖上述Oracle服务)
+* 初始化数据  
+	> 根据DB初始化(需要依赖上述Oracle服务)  
+		> 访问URL:http://localhost:8081/es_maven/init/init.jsp?ids=$ids&type=$type  
+	> Test数据Init  
+		> 访问URL:[http://localhost:8081/es_maven/init/test/init.jsp](http://localhost:8081/es_maven/init/test/init.jsp)
 
-* 访问URL:http://localhost:8081/es_maven/init/init.jsp?ids=$ids&type=$type
-		
-* Test数据Init
+* 查看数据  
+	> 访问URL:http://localhost:8081/es_maven/interface/get.jsp?id=$id&type=$type
 
-* 访问URL:[http://localhost:8081/es_maven/init/test/init.jsp](http://localhost:8081/es_maven/init/test/init.jsp)
+* 自动完成示例  
+	> 访问URL:[http://localhost:8081/es_maven/index.jsp](http://localhost:8081/es_maven/index.jsp)
 
-5.查看数据
-		
-* 访问URL:http://localhost:8081/es_maven/interface/get.jsp?id=$id&type=$type
-
-6.自动完成示例
-
-* 访问URL:[http://localhost:8081/es_maven/index.jsp](http://localhost:8081/es_maven/index.jsp)
-
-7.需要注意问题
-		
-		注入bean：esNode
-
+* 需要注意问题
+	* 注入bean：esNode  
 ```xml
 		<bean id="esNode" class="com.search.es.ElasticsearchNodeFactoryBean">
 			<property name="configLocation" value="classpath:conf/elasticsearch.properties" />
 		</bean>
 ```
-		
-		Java Bean使用该Bean
-		
+	* Java Bean使用该Bean  
 ```java
 		@Autowired
 		ElasticsearchNodeFactoryBean esNode;
@@ -67,9 +56,7 @@ es_maven
 			return esClient;
 		}
 ```
-		
-		JSP使用该Bean
-		
+	* JSP使用该Bean  
 ```java
 		InternalNode node = (InternalNode)context.getBean("esNode");
 		Client esclient = node.client();
